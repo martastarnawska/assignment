@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <div class="container hidden">
+    <!-- Heading -->
+    <div class="heading">
+
+      <div class="box heading1">
+        <p class = "t title1"> </p>
+        <select class="sort" id="sort1" name="sort1">
+          <option value="no"></option>
+          <option value="ascending">up</option>
+          <option value="descending">down</option>
+        </select>
+      </div>
+
+      <div class="box heading2">
+        <p class = "t title2"> </p>
+        <select class="sort" id="sort2" name="sort2">
+          <option value="no"></option>
+          <option value="ascending">up</option>
+          <option value="descending">down</option>
+        </select>
+      </div>
+
+      <div class="box heading3">
+        <p class = "t title3"> </p>
+        <select class="sort" id="sort3" name="sort3">
+          <option value="no"></option>
+          <option value="ascending">up</option>
+          <option value="descending">down</option>
+        </select>
+      </div>
+
+
+
+      <!-- <div class="box heading1">
+        <div class="dropdown" id="sort1">
+          <p class = "title t1"> </p>
+            <div class="content">
+              <div id="ascending1">ascending</div>
+              <div id="descending1">descending</div>
+            </div>
+        </div>
+
+      </div>
+
+      <div class="box heading1">
+        <p class = "title t1"> </p>
+        <div class="dropdown" id="sort1">
+          <button class="dropbutton">sort</button>
+          <div class="content">
+            <div id="ascending1">ascending</div>
+            <div id="descending1">descending</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box heading2">
+        <p class="title t2"> </p>
+        <div class="dropdown" id="sort2">
+          <button class="dropbutton">sort</button>
+          <div class="content">
+            <div id="ascending2">ascending</div>
+            <div id="descending2">descending</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box heading3">
+        <p class="title t3"></p>
+        <div class="dropdown" id="sort3">
+          <button class="dropbutton">sort</button>
+          <div class="content">
+            <div id="ascending3">ascending</div>
+            <div id="descending3">descending</div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+
+
+    <div class="rows">
+
+    </div>
+
+    <div class = "footer">
+      <p class="number"> rows per page: 5</p>
+
+      <select class="select" id="select" name="selector">
+        <option value=""></option>
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="15">15</option>
+      </select>
+
+      <p class="info"></p>
+
+      <!-- <button class="previous">back</button>
+      <button class="nextPage">next</button> -->
+      <img class="btn previous" src="icons/left.svg" height="20x" width="20px" alt="">
+      <img class="btn nextPage" src="icons/right.svg" height="20px" width="20px" alt="">
+    </div>
+
+
+  <!-- Form for new tasks -->
+      <div class="newForm">
+        <!-- <h5 id="titleA"></h5> -->
+        <input id="inputA" type="text">
+        <!-- <h5 id="titleB"></h5> -->
+        <input id="inputB" type="text">
+        <!-- <h5 id="titleC"></h5> -->
+        <input id="inputC" type="text">
+        <button id="newButton">add element</button>
+
+      </div>
+
+    </div>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>

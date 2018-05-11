@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/form.css">
+  <title>Document</title>
+</head>
+<body>
+  <div class="form">
+
+    <h4 class="heading">Choose titles and types of data for columns in your table</h4>
+
+    <div class="piece">
+      <h4>first column</h4>
+      <!-- <p>(choose the title and the type of data for your first column)</p> -->
+      <input id="input1" type="text">
+      <select name="" id="dropdown1">
+        <option value="text">text</option>
+        <option value="date">date</option>
+        <option class="boolean" value="boolean">boolean</option>
+      </select>
+    </div>
+    <div class="piece">
+      <h4>second column</h4>
+      <input id="input2" type="text">
+      <select name="" id="dropdown2">
+        <option value="text">text</option>
+        <option value="date">date</option>
+        <option class="boolean" value="boolean">boolean</option>
+      </select>
+    </div>
+    <div class="piece">
+      <h4>third column</h4>
+      <input id="input3" type="text">
+      <select name="" id="dropdown3">
+        <option value="text">text</option>
+        <option value="date">date</option>
+        <option class="boolean" value="boolean">boolean</option>
+      </select>
+    </div>
+    <div>
+      <form action="table.html">
+        <button id="btn1" class="button">submit</button>
+      </form>
+    </div>
+
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/form.js"></script>
+</body>
+</html>

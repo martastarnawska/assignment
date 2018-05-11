@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+  justify-content: center;
+  align-content: center;
+  max-width: 550px;
+  border: 10px solid lightgray;
+  font-family: 'Calibri' sans-serif;
+
+}
+
+.heading {
+  text-align: center;
+  padding-bottom: 1em;
+  padding-top: 1em;
+  padding-left: -left: 20px;
+  color: white;
+  background-color:  #494430;
+}
+
+
+.piece {
+  /* max-width: 400px; */
+  margin-bottom: 30px;
+  margin-left: 50px;
+}
+
+form {
+  padding-left: 50px;
+  padding-bottom: 20px;
+}
