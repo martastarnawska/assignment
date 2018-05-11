@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Calibri', sans-serif;
 }
 .button {
   display: block;
@@ -12,7 +13,7 @@
 .heading {
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
-  grid-template-rows: 3em;
+  grid-template-rows: minmax(3em, auto);
   background-color: #494430;
   color: white;
 }
@@ -28,11 +29,9 @@
   justify-content: flex-start;
 }
 
-* {
-  font-family: 'Calibri', sans-serif;
-}
+
 .title {
-  text-align: center;
+  padding-right: 30px;
 }
 
 .sort {

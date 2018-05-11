@@ -41,58 +41,45 @@ $("#btn1").click(function() {
   localStorage.setItem('typeA', type1);
   localStorage.setItem('typeB', type2);
   localStorage.setItem('typeC', type3);
-  });
+});
 
-
+// get localStorage at table.html:
   n1 = localStorage.getItem('titleA');
   n2 = localStorage.getItem('titleB');
   n3 = localStorage.getItem('titleC');
   t1 = localStorage.getItem('typeA');
   t2 = localStorage.getItem('typeB');
   t3 = localStorage.getItem('typeC');
-  console.log(t3);
 
   // specify table titles
   $(".title1").text(n1);
   $(".title2").text(n2);
   $(".title3").text(n3);
-    // $(".heading1").text(n1);
-    // $(".heading2").text(n2);
-    // $(".heading3").text(n3);
 
-  // specify inputs titles
-    $("#titleA").text(n1);;
-    $("#titleB").text(n2);
-    $("#titleC").text(n3);
-
-  // Hide boolean input
-    if (t1 == 'boolean') {
-      $("#inputA").prop('disabled', true);
-    } else if (t2 == 'boolean') {
-      $("#inputB").prop('disabled', true);
-    } else if (t3 == 'boolean') {
-      $("#inputC").prop('disabled', true);
-    };
+  // Disable boolean input
+  if (t1 == 'boolean') {
+    $("#inputA").prop('disabled', true);
+  } else if (t2 == 'boolean') {
+    $("#inputB").prop('disabled', true);
+  } else if (t3 == 'boolean') {
+    $("#inputC").prop('disabled', true);
+  };
 
   // specify types of inputs
-
   $("#inputA").prop('type', t1);
   $("#inputB").prop('type', t2);
   $("#inputC").prop('type', t3);
 
-
-
-  // variables wich will be properties of an object;
+  // variables to store data from inputs
   var a;
   var b;
   var c;
 
 
-  var elements;
+  var elements; // array to store objects with data
 
   var chunk;
   var chunkLength;
-
   var pageNumber;
   var start;
   var info;
@@ -107,7 +94,7 @@ $("#btn1").click(function() {
   var itemsPerPage;
   var itemsLength;
 
-
+// Get data from local storage or create an empty array
   if (localStorage.getItem('items')) {
   elements = JSON.parse(localStorage.getItem('items'));
   } else {
@@ -118,85 +105,84 @@ $("#btn1").click(function() {
   localStorage.setItem('items', JSON.stringify(elements));
   var data = JSON.parse(localStorage.getItem('items'));
 
-  // Adding new rows to table
+
+
+  // Adding new row to the table
+
   $("#newButton").click(function() {
-    // geting values from inputs and puting them into object
+    // geting values from inputs
     a = $("#inputA").val();
     b = $("#inputB").val();
     c = $("#inputC").val();
-    // czyszczenie inputów
-      $("#inputA").val("");
-      $("#inputB").val("");
-      $("#inputC").val("");
+    // cleaning inputs
+    $("#inputA").val("");
+    $("#inputB").val("");
+    $("#inputC").val("");
 
-      if (t1 == 'boolean') {
-        a = '<input class="checkbox" type="checkbox">';
-      } else if (t2 == 'boolean') {
-        b = '<input class="checkbox" type="checkbox">';
-      } else if (t3 == 'boolean') {
-        c = '<input class="checkbox" type="checkbox">';
-      }
+  // Adding checkbox in boolean column
+    if (t1 == 'boolean') {
+      a = '<input class="checkbox" type="checkbox">';
+    } else if (t2 == 'boolean') {
+      b = '<input class="checkbox" type="checkbox">';
+    } else if (t3 == 'boolean') {
+      c = '<input class="checkbox" type="checkbox">';
+    }
 
+    // Storing data in object
     var object = {
       first: a,
       second: b,
       third: c,
     }
-    // Adding new object into array
 
+    // Adding new object into array & saving array in local storage
     elements.unshift(object);
     localStorage.setItem("items", JSON.stringify(elements));
 
-
-
+    // Adding row to the table
     $(".rows").append("<div>"+elements[0].first+"</div>");
     $(".rows").append("<div>"+elements[0].second+"</div>");
     $(".rows").append("<div class='cell'>"+elements[0].third+"</div>");
 
-    chunk = $(".rows").children();
+    chunk = $(".rows").children(); // all divs stored in the table
     chunkLength = chunk.length;
     pageNumber = Math.ceil(chunkLength / chunksPerPage);
 
 
-    if (presentPage = 1 && chunkLength > 15) {
+
+    if (presentPage = 1 && chunkLength > chunksPerPage) {
       var first = chunksPerPage * (pageNumber -1);
       var last = first + chunksPerPage;
-
       chunk.hide();
       chunk.slice(first, last).show();
-
       pageNumber = Math.ceil(chunkLength / chunksPerPage);
       presentPage = pageNumber;
+    }
 
-    } else if (presentPage < pageNumber) {
+     else if (presentPage < pageNumber) {
       var first = chunksPerPage * (pageNumber -1);
       var last = first + chunksPerPage;
       chunk.hide();
       chunk.slice(first, last).show();
       presentPage = pageNumber;
-
     }  else if (presentPage === pageNumber) {
       var first = chunksPerPage * pageNumber;
       var last = first + chunksPerPage;
       chunk.hide();
       chunk.slice(first, last).show();
       presentPage = pageNumber;
-
     }
-console.log(presentPage);
-console.log(pageNumber);
-info();
-
-
+    info();
   });
 
-    var newRow = function(item) {
-      $(".rows").prepend("<div class='cell'>"+item.third+"</div>");
-      $(".rows").prepend("<div>"+item.second+"</div>");
-      $(".rows").prepend("<div>"+item.first+"</div>");
-    }
 
-  // odtwarzanie przy odświeżaniu
+  var newRow = function(item) {
+    $(".rows").prepend("<div class='cell'>"+item.third+"</div>");
+    $(".rows").prepend("<div>"+item.second+"</div>");
+    $(".rows").prepend("<div>"+item.first+"</div>");
+  }
+
+  //
     data.forEach(function(item) {
     newRow(item);
   });
@@ -205,43 +191,45 @@ info();
   chunkLength = chunk.length;
   presentPage = 1;
 
+
   var pagination = function() {
     if (chunkLength > chunksPerPage) {
       chunk.hide();
       chunk.slice(0, chunksPerPage).show();
       pageNumber = Math.ceil(chunkLength / chunksPerPage);
-      // presentPage = 1;
-      console.log(presentPage);
     } else {
       chunk.show();
     }
   }
-
-
-
 
   start = function() {
     chunksPerPage = 15;
     pagination();
   };
 
+// information about pagination
   var info = function() {
     itemsPerPage = chunksPerPage / 3
     itemsLength = chunkLength / 3;
-    var first = ((presentPage - 1) * itemsPerPage) + 1;
-    if (presentPage === pageNumber) {
-      var last = itemsLength;
+    if (chunkLength === 0) {
+      var first = 0;
+      var last = 0;
     } else {
-      var last = (first + itemsPerPage) - 1;
+      var first = ((presentPage - 1) * itemsPerPage) + 1;
+      if (presentPage === pageNumber) {
+        var last = itemsLength;
+      } else {
+        var last = (first + itemsPerPage) - 1;
+      }
     }
+
     var comunicat = first + "-" + last + " of " + itemsLength;
     $(".info").text(comunicat);
-
   }
   info();
 
+// Seting number rows per pager
   $(".select").on('change', function(){
-    // select = $("#select[name=selector]");'
     presentPage = 1;
     selected = select.val();
     $(".number").text("rows per page: " + selected);
@@ -253,21 +241,14 @@ info();
       chunk.show();
     }
     pageNumber = Math.ceil(chunkLength / chunksPerPage);
-    console.log(presentPage);
     info();
   })
 
-
-
-
+// change page for next:
   $(".nextPage").click(function() {
-    // selected = select.val();
-    // chunksPerPage = selected * 3;
-    if (pageNumber !== presentPage) {
+    if (pageNumber > presentPage) {
       var first = chunksPerPage * presentPage;
       var last = first + chunksPerPage;
-      // var first = chunksPerPage * presentPage;
-      // var last = first + chunksPerPage;
       chunk.hide();
       chunk.slice(first, last).show();
       presentPage++;
@@ -278,8 +259,7 @@ info();
     }
   });
 
-
-
+// change page for previous
   $(".previous").click(function() {
     if (presentPage !== 1) {
       presentPage--;
@@ -288,15 +268,11 @@ info();
       chunk.hide();
       chunk.slice(first, last).show();
       pageNumber = Math.ceil(chunkLength / chunksPerPage);
-      console.log(presentPage);
-      console.log(pageNumber)
       info();
     }
   });
 
   start();
-  console.log(chunkLength)
-
 
   // Function sort Ascending
   var sort = function(column) {
@@ -323,84 +299,31 @@ info();
   };
 
     // function sort Descending
-    var sortDescending = function(column) {
-      function compare(x, y) {
-        if (x[column] < y[column]) {
-          return - 1;
-        } else if (x[column] > y[column]) {
-          return  1;
-        } else {
-          return 0;
-        }
+  var sortDescending = function(column) {
+    function compare(x, y) {
+      if (x[column] < y[column]) {
+        return - 1;
+      } else if (x[column] > y[column]) {
+        return  1;
+      } else {
+        return 0;
       }
-      elements.sort(compare);
-      elements.reverse();
+    }
+    elements.sort(compare);
+    elements.reverse();
 
-      $(".rows").empty();
-      for (var i = 0; i < elements.length; i++) {
-        $(".rows").append("<div>"+elements[i].first+"</div>");
-        $(".rows").append("<div>"+elements[i].second+"</div>");
-        $(".rows").append("<div>"+elements[i].third+"</div>");
-      }
-      chunk = $(".rows").children();
-      chunkLength = chunk.length;
-      pagination();
-    };
-
-    // $(".dropdown").hide();
-
-    // $(".sort").hide();
+    $(".rows").empty();
+    for (var i = 0; i < elements.length; i++) {
+      $(".rows").append("<div>"+elements[i].first+"</div>");
+      $(".rows").append("<div>"+elements[i].second+"</div>");
+      $(".rows").append("<div>"+elements[i].third+"</div>");
+    }
+    chunk = $(".rows").children();
+    chunkLength = chunk.length;
+    pagination();
+  };
 
 
-    $(".heading1").click(function() {
-      $("#sort1").show();
-    });
-
-    $(".heading2").click(function() {
-      $("#sort2").show();
-    });
-
-    $(".heading3").click(function() {
-      $("#sort3").show();
-    });
-
-    //
-    // $("#ascending1").click(function() {
-    //   sort('first');
-    //   $("#sort1").hide();
-    //   $(".t1").css('text-decoration', 'underline');
-    //
-    // });
-    //
-    // $("#ascending2").click(function() {
-    //   sort('second');
-    //   $("#sort2").hide();
-    //   $(".t2").css('text-decoration', 'underline');
-    // });
-    //
-    // $("#ascending3").click(function() {
-    //   sort('third');
-    //   $("#sort3").hide();
-    //   $(".t3").css('text-decoration', 'underline');
-    // });
-    //
-    // $("#descending1").click(function() {
-    //   sortDescending('first');
-    //   $("#sort1").hide();
-    //   $(".t1").css('text-decoration', 'underline');
-    // });
-    //
-    // $("#descending2").click(function() {
-    //   sortDescending('second');
-    //   $("#sort2").hide();
-    //   $(".t2").css('text-decoration', 'underline');
-    //
-    // });
-    // $("#descending3").click(function() {
-    //   sortDescending('third');
-    //   $("#sort2").hide();
-    //   $(".t3").css('color', 'orange');
-    // });
 
     var sort1= $("#sort1[name=sort1]");
     var sort2= $("#sort2[name=sort2]");
